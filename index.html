@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UstazMentor - Ғарыштық ракетаны ұшыру: Ақпаратты өлшеу</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a 1e293b 1e1b4b);
+            background-color: #0f172a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #f8fafc;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 2px solid #38bdf8;
+        }
+        h1 {
+            color: #38bdf8;
+            font-family: 'Georgia', serif;
+            font-size: 26px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .subtitle {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        /* Ракета мен прогресс шкаласы стилі */
+        .space-track {
+            background: #0f172a;
+            border-radius: 10px;
+            height: 30px;
+            width: 100%;
+            position: relative;
+            margin: 25px 0;
+            border: 1px solid #475569;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #38bdf8, #22c55e);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        .rocket-icon {
+            position: absolute;
+            top: -5px;
+            left: 0%;
+            font-size: 24px;
+            transition: left 0.5s ease;
+            transform: rotate(45deg);
+        }
+        .case-card {
+            background: #334155;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid #475569;
+            margin: 15px 0;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            color: #e2e8f0;
+        }
+        .btn {
+            background: #0284c7;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #0369a1;
+        }
+        .result-box {
+            background: #065f46;
+            border: 1px solid #34d399;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #d1fae5;
+            display: none;
+        }
+        .name-section {
+            background: #334155;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #475569;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .name-section input {
+            padding: 10px;
+            width: 60%;
+            border-radius: 5px;
+            border: 1px solid #64748b;
+            background: #0f172a;
+            color: white;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 5-тақырып: Ақпаратты өлшеу</h1>
+    <div class="subtitle">Оқу мақсаты: 7.2.1.2 — алфавиттік тәсілді қолданып ақпарат көлемін анықтау</div>
+    <hr style="border-top: 1px solid #475569;">
+
+    <div class="name-section" id="nameSection">
+        <h3>🧑‍🚀 Ғарышкер аты-жөнін енгізіңіз:</h3>
+        <input type="text" id="studentName" placeholder="Мысалы: Айдын Әбілқайыр">
+        <button class="btn" style="width: auto; display: inline-block; margin-top: 0;" onclick="startGame()">Ракетаға міну 🌟</button>
+    </div>
+
+    <div id="gameContent" style="display: none;">
+        <h3 id="welcomeMsg" style="color: #38bdf8; text-align: center;"></h3>
+        
+        <!-- Ракета траекториясы мен прогресс бар -->
+        <div class="space-track">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="rocket-icon" id="rocketIcon">🚀</div>
+        </div>
+        <p style="text-align: center; font-size: 13px; color: #94a3b8;">Орбитаға жету шкаласы (10 сұрақ)</p>
+
+        <!-- 1-сұрақ -->
+        <div class="case-card">
+            <p><b>1. Қуаттылығы 32 таңбалы алфавиттің 1 таңбасының ақпараттық салмағы (i) қанша бит?</b></p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> А) 4 бит</label>
+                <label><input type="radio" name="q1" value="b"> Б) 5 бит</label>
+                <label><input type="radio" name="q1" value="c"> В) 8 бит</label>
+                <label><input type="radio" name="q1" value="d"> Г) 32 бит</label>
+            </div>
+        </div>
+
+        <!-- 2-сұрақ -->
+        <div class="case-card">
+            <p><b>2. Компьютерлік алфавит көбіне 256 таңбадан тұрады. Оның бір таңбасының ақпараттық салмағы қанша?</b></p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> А) 1 байт (8 бит)</label>
+                <label><input type="radio" name="q2" value="b"> Б) 2 байт</label>
+                <label><input type="radio" name="q2" value="c"> В) 16 бит</label>
+                <label><input type="radio" name="q2" value="d"> Г) 256 бит</label>
+            </div>
+        </div>
+
+        <!-- 3-сұрақ -->
+        <div class="case-card">
+            <p><b>3. Қуаттылығы 16 таңбалы алфавиттің бір таңбасының салмағы қанша бит?</b></p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> А) 2 бит</label>
+                <label><input type="radio" name="q3" value="b"> Б) 4 бит</label>
+                <label><input type="radio" name="q3" value="c"> В) 8 бит</label>
+                <label><input type="radio" name="q3" value="d"> Г) 16 бит</label>
+            </div>
+        </div>
+
+        <!-- 4-сұрақ -->
+        <div class="case-card">
+            <p><b>4. Ұзындығы 10 таңбадан тұратын және әр таңбасы 8 бит болатын мәтіннің көлемі қанша?</b></p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> А) 18 бит</label>
+                <label><input type="radio" name="q4" value="b"> Б) 10 байт</label>
+                <label><input type="radio" name="q4" value="c"> В) 80 бит (10 байт)</label>
+                <label><input type="radio" name="q4" value="d"> Г) 80 байт</label>
+            </div>
+        </div>
+
+        <!-- 5-сұрақ -->
+        <div class="case-card">
+            <p><b>5. «АЛМАТЫ» сөзі (6 әріп) 32 таңбалы алфавит арқылы жазылған. Бұл хабардың ақпараттық көлемі қанша?</b></p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> А) 30 бит</label>
+                <label><input type="radio" name="q5" value="b"> Б) 48 бит</label>
+                <label><input type="radio" name="q5" value="c"> В) 6 бит</label>
+                <label><input type="radio" name="q5" value="d"> Г) 32 бит</label>
+            </div>
+        </div>
+
+        <!-- 6-сұрақ -->
+        <div class="case-card">
+            <p><b>6. Алфавиттің қуаттылығы N = 64 болса, бір таңбаның ақпараттық салмағы (i) қанша болады?</b></p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="a"> А) 5 бит</label>
+                <label><input type="radio" name="q6" value="b"> Б) 6 бит</label>
+                <label><input type="radio" name="q6" value="c"> В) 7 бит</label>
+                <label><input type="radio" name="q6" value="d"> Г) 8 бит</label>
+            </div>
+        </div>
+
+        <!-- 7-сұрақ -->
+        <div class="case-card">
+            <p><b>7. Тек 2 таңбадан (0 және 1) тұратын екілік алфавиттің бір таңбасының салмағы қанша бит?</b></p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="a"> А) 1 бит</label>
+                <label><input type="radio" name="q7" value="b"> Б) 2 бит</label>
+                <label><input type="radio" name="q7" value="c"> В) 0 бит</label>
+                <label><input type="radio" name="q7" value="d"> Г) 8 бит</label>
+            </div>
+        </div>
+
+        <!-- 8-сұрақ -->
+        <div class="case-card">
+            <p><b>8. Қуаттылығы 8 таңбалы алфавиттің бір таңбасының ақпараттық салмағы қанша?</b></p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="a"> А) 2 бит</label>
+                <label><input type="radio" name="q8" value="b"> Б) 3 бит</label>
+                <label><input type="radio" name="q8" value="c"> В) 4 бит</label>
+                <label><input type="radio" name="q8" value="d"> Г) 8 бит</label>
+            </div>
+        </div>
+
+        <!-- 9-сұрақ -->
+        <div class="case-card">
+            <p><b>9. 20 таңбадан тұратын және әр таңбасы 4 бит болатын мәтіннің ақпараттық көлемі қанша?</b></p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="a"> А) 24 бит</label>
+                <label><input type="radio" name="q9" value="b"> Б) 16 бит</label>
+                <label><input type="radio" name="q9" value="c"> В) 80 бит</label>
+                <label><input type="radio" name="q9" value="d"> Г) 100 бит</label>
+            </div>
+        </div>
+
+        <!-- 10-сұрақ -->
+        <div class="case-card">
+            <p><b>10. Алфавит қуаттылығы (N) мен бір таңбаның салмағы (i) арасындағы негізгі байланыс формуласы қандай?</b></p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="a"> А) N = i * 2</label>
+                <label><input type="radio" name="q10" value="b"> Б) N = 2^i</label>
+                <label><input type="radio" name="q10" value="c"> В) i = N * 8</label>
+                <label><input type="radio" name="q10" value="d"> Г) N = i^2</label>
+            </div>
+        </div>
+
+        <button class="btn" onclick="checkResults()">Ракета ұшыруды тексеру 🚀</button>
+        
+        <div class="result-box" id="resultBox"></div>
+    </div>
+</div>
+
+<script>
+    let currentName = "";
+
+    function startGame() {
+        const nameInput = document.getElementById("studentName");
+        if (!nameInput) return;
+        
+        const nameValue = nameInput.value.trim();
+        if(nameValue === "") {
+            alert("⚠️ Өтінемін, ғарышкер аты-жөнін енгізіңіз!");
+            return;
+        }
+        currentName = nameValue;
+        
+        document.getElementById("nameSection").style.display = "none";
+        document.getElementById("gameContent").style.display = "block";
+        document.getElementById("welcomeMsg").innerText = `🧑‍🚀 Қош келдіңіз, ${currentName}! Ракетаңыз ұшуға дайын!`;
+    }
+
+    function checkResults() {
+        let score = 0;
+
+        // Дұрыс жауаптар: q1:b, q2:a, q3:b, q4:c, q5:a, q6:b, q7:a, q8:b, q9:c, q10:b
+        const answers = {
+            q1: 'b',
+            q2: 'a',
+            q3: 'b',
+            q4: 'c',
+            q5: 'a',
+            q6: 'b',
+            q7: 'a',
+            q8: 'b',
+            q9: 'c',
+            q10: 'b'
+        };
+
+        for (let key in answers) {
+            const selected = document.querySelector(`input[name="${key}"]:checked`);
+            if (selected && selected.value === answers[key]) {
+                score += 1;
+            }
+        }
+
+        // Прогресс шкаласы мен ракетаның жылжуы (әр ұпай = 10%)
+        let percentage = score * 10;
+        document.getElementById("progressBar").style.width = percentage + "%";
+        document.getElementById("rocketIcon").style.left = (percentage - 5) + "%";
+
+        const resultBox = document.getElementById("resultBox");
+        resultBox.style.display = "block";
+        
+        let rank = "";
+        if (score === 10) {
+            rank = "🌟 Бас ғарышкер-космонавт! Орбита бағындырылды!";
+        } else if (score >= 7) {
+            rank = "👍 Тәжірибелі бортинженер!";
+        } else {
+            rank = "💡 Жерге қайту керек, есептеулерді қайталаңыз!";
+        }
+
+        resultBox.innerHTML = `🎉 Ракета ұшырылды, ${currentName}!<br> Сіздің нәтижеңіз: 10 ұпайдан <b>${score} балл</b> (${percentage}%).<br><span style="font-size: 16px; color: #fef08a;">Дәрежеңіз: ${rank}</span>`;
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
